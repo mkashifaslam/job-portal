@@ -6,7 +6,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "strict": true,
-    "noEmit": true,
+    "noEmit": false,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
