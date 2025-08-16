@@ -4,11 +4,11 @@ services:
     image: postgres:15
     restart: always
     environment:
-      POSTGRES_DB: job_portal
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: ${POSTGRES_DB:-job_portal}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-123456}
     ports:
-      - '5432:5432'
+      - '${DB_PORT:-5432}:5432'
     volumes:
       - db_data:/var/lib/postgresql/data
 
@@ -17,12 +17,12 @@ services:
     command: npm run start:dev
     environment:
       DB_HOST: db
-      DB_PORT: 5432
-      DB_USERNAME: postgres
-      DB_PASSWORD: 123456
-      DB_DATABASE: job_portal
+      DB_PORT: ${DB_PORT:-5432}
+      DB_USERNAME: ${POSTGRES_USER:-postgres}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-123456}
+      DB_DATABASE: ${POSTGRES_DB:-job_portal}
     ports:
-      - '3000:3000'
+      - '${BACKEND_PORT:-3000}:3000'
     depends_on:
       - db
     volumes:
@@ -34,7 +34,7 @@ services:
     build: ./frontend
     command: npm run dev -- --host 0.0.0.0
     ports:
-      - '5173:5173'
+      - '${FRONTEND_PORT:-5173}:5173'
     depends_on:
       - backend
     volumes:

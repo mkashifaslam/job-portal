@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:3000/jobs';
+import { apiUrl } from './apiUrl';
+const API_URL = apiUrl('/jobs');
 
 export async function getJobs() {
   const res = await fetch(API_URL);
